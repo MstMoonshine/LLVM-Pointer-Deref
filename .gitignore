@@ -1,2 +1,5 @@
 build/
 *.ll
+*.bc
+*.elf
+*.o
