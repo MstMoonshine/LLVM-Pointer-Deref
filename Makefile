@@ -4,13 +4,14 @@ build/libPointerDeref.so: pointer-deref.cpp pointer-deref.h
 	-@mkdir -p build
 	cd build && cmake .. && make
 
-test/testfile.ll: test/testfile.c
-	clang -O1 -S -emit-llvm $< -o $@
+test:
+	make -C test
 
-test: test/testfile.ll
-	${LLVM_INSTALL_DIR}/bin/opt -load-pass-plugin build/libPointerDeref.so -passes=pointer-deref -disable-output $<
+run:
+	make run -C test
 
 clean:
 	rm -rf build
+	make clean -C test
 
 .PHONY: all clean test
